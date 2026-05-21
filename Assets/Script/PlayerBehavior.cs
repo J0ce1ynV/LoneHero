@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
 {
+    public GameBehavior GameManager;
+
     public float MoveSpeed = 10f;
     public float RotateSpeed = 75f;
     public float JumpVelocity = 5f;
@@ -22,6 +24,7 @@ public class PlayerBehavior : MonoBehaviour
 
     void Start()
     {
+        GameManager = GameObject.Find("Game Manager").GetComponent<GameBehavior>();
         _rb = GetComponent<Rigidbody>();
     }
 
