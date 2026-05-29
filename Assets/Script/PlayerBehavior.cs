@@ -24,14 +24,14 @@ public class PlayerBehavior : MonoBehaviour
 
     void Start()
     {
-        GameManager = GameObject.Find("Game Manager").GetComponent<GameBehavior>();
         _rb = GetComponent<Rigidbody>();
+        GameManager = GameObject.Find("Game Manager").GetComponent<GameBehavior>();
     }
 
     void Update()
     {
         _vInput = Input.GetAxis("Vertical") * MoveSpeed;
-        _hInput = Input.GetAxis("Horizontal") * RotateSpeed;
+        //_hInput = Input.GetAxis("Horizontal") * RotateSpeed;
         _isJumping = Input.GetKeyDown(KeyCode.Space);
 
         //lompat 
@@ -51,8 +51,8 @@ public class PlayerBehavior : MonoBehaviour
         _rb.MovePosition(transform.position + transform.forward * _vInput * Time.fixedDeltaTime);
 
         // Rotasi kiri kanan
-        Quaternion angleRot = Quaternion.Euler(Vector3.up * _hInput * Time.fixedDeltaTime);
-        _rb.MoveRotation(_rb.rotation * angleRot);
+        //Quaternion angleRot = Quaternion.Euler(Vector3.up * _hInput * Time.fixedDeltaTime);
+        //_rb.MoveRotation(_rb.rotation * angleRot);
 
         // Lompat
         if (_isJumping)
@@ -67,7 +67,7 @@ public class PlayerBehavior : MonoBehaviour
             Vector3 spawnPos = transform.position + transform.forward * 1f;
             GameObject newBullet = Instantiate(Bullet, spawnPos, this.transform.rotation);
             Rigidbody bulletRB = newBullet.GetComponent<Rigidbody>();
-            bulletRB.velocity = this.transform.forward * BulletSpeed;
+            bulletRB.linearVelocity = this.transform.forward * BulletSpeed;
             _isShooting = false;
         }
     }
